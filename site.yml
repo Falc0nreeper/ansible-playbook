@@ -1,0 +1,9 @@
+---
+- host: lemp
+  remote_user: ansible
+  become: yes
+
+  roles:
+    - common
+    - web
+    - db

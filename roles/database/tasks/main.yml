@@ -1,0 +1,36 @@
+---
+- name: Install Mysql
+  apt:
+    name: ['mysql-server', 'mysql-client', 'python-mysqldb']
+    state: latest
+  notify: restart mysql
+
+- name: Create database
+  mysql_db:
+    name: '{{ db_name }}'
+    state: present
+
+
+- name: Add root user to mysql
+  mysql_user:
+    name: {{ mysql_user }}
+    password: {{ mysql_root_password }}
+    encrypted: yes
+    priv: '{{ mysql_db_name }}.*ALL'
+    state: present
+    login_unix_socket: /var/run/mysqld/mysqld.sock
+
+- name: Remove all anonymous user from mysql
+  mysql_user:
+    name: ''
+    host_all: yes
+    state: absent
+    login_user: {{ mysql_user }}
+    login_password: {{ mysql_root_password }}
+
+- name: Removes mysql test database
+  mysql_db:
+    name: test
+    state: absent
+    login_user: {{ mysql_user }}
+    login_password: {{ mysql_root_password }}

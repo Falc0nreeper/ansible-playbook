@@ -1,0 +1,11 @@
+---
+download_dir: /tmp
+nginx_dir: /etc/nginx/
+nginx_version: nginx-2.11.2
+nginx_default_dir: /etc/nginx/sites-enabled/default
+user_webserver: www-data
+http_host: "your_domain"
+http_conf: "your_domain.conf"
+http_port: "80"
+https_port: "443"
+domain: todo.com

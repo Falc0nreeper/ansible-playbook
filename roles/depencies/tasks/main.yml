@@ -1,0 +1,29 @@
+---
+- name: Update cache if needed
+  apt: update_cache=true cache_valid=3600
+
+- name: Setup timezone to Asia/Tashkent
+  timezone:
+    name: Asia/Tashkent
+    state: latest
+
+- name: add repo
+- apt_repository:
+    repo: 'ppa:ondrej/php'
+
+- name: install php
+  apt: name={{ php_version }}-fpm  state=latest
+
+- name: install php depencies
+  apt:
+    name: {{ php_depencies }}
+    state: present
+
+- name: Configure php.ini
+  blockfile:
+    dest: /etc/php/{{php_version}}/fpm/php.ini
+    block: |
+      date.time = Asia/Tashkent
+      cgi-fix_pathinfo = 0
+    backup: yes
+  notify: restart php-fpm

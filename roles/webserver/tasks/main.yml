@@ -1,0 +1,36 @@
+---
+# tasks file for webserver
+- name: install nginx
+  apt:
+    name: {{ nginx_version }}
+    state: latest
+
+- name: create www directory
+  file:
+    path: /var/www/{{domain}}
+    state: directory
+    mode: 0755
+    owner: {{ user_webserver }}
+    group: {{ user_webserver }}
+
+- name: delete default file nginx directory
+  file:
+    path: {{nginx_default_dir}}
+    state: absent
+  notify: restart nginx
+
+- name: copy configuration of new website
+  template:
+    src: nginx.conf.j2
+    dest: /etc/nginx/sites-enabled/{{ domain }}.conf
+    owner: root
+    group: root
+    mode: 0644
+  notify: restart nginx
+
+- name: Enables new site vitualhost
+  file:
+    src: /etc/nginx/sites-enabled/{{ domain }}.conf
+    dest: /etc/nginx/sites-available/{{ domain }}.conf
+    state: link
+  notify: restart nginx
