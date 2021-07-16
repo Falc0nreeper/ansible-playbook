@@ -1,9 +1,10 @@
 ---
-- host: lemp
-  remote_user: ansible
+- hosts: prod
+  remote_user: awxible
   become: yes
 
   roles:
-    - common
-    - web
-    - db
+    - depencies
+    - network
+    - webserver
+    - database

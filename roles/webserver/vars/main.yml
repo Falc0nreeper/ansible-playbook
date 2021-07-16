@@ -1,7 +1,7 @@
 ---
 download_dir: /tmp
 nginx_dir: /etc/nginx/
-nginx_version: nginx-2.11.2
+nginx_version: nginx
 nginx_default_dir: /etc/nginx/sites-enabled/default
 user_webserver: www-data
 http_host: "your_domain"

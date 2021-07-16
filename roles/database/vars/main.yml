@@ -1,4 +1,4 @@
 ---
-mysql_root_password: '*C960D382DB42E57D3BAC33891CF87900DCB1A869'
-mysql_db_name: #your database name
-mysql_user: "root"
+mysql_password: C960D382DB42E57D3BAC33891CF87900DCB1A869
+mysql_db_name: datas
+mysql_user: newa

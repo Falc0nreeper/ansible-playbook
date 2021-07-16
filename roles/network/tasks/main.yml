@@ -1,19 +1,19 @@
 ---
 - name: Enables UFW
   ufw:
-    state: enable
+    state: enabled
     policy: allow
     logging: 'on'
 
 - name: Allow port through firewall for webserver UFW
   ufw:
-    rule:
-    port: {{ http_port }}
+    rule: allow
+    port: '{{ http_port }}'
     proto: tcp
 
 - name: Allow port through firewalld for webserver https
   ufw:
-    rule:
-      port: {{ https_port}}
-      proto: tcp
-  notify: reload ufw
+    rule: allow
+    port: '{{ https_port}}'
+    proto: tcp
+  notify: reloaded ufw

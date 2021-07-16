@@ -1,36 +1,59 @@
 ---
+- name: "Install ansible python3 mysql dependency"
+  apt:
+    name: python3-mysqldb
+    state: latest
+
 - name: Install Mysql
   apt:
-    name: ['mysql-server', 'mysql-client', 'python-mysqldb']
+    name: ['mysql-server', 'mysql-client']
     state: latest
   notify: restart mysql
 
 - name: Create database
   mysql_db:
-    name: '{{ db_name }}'
+    name: '{{ mysql_db_name }}'
     state: present
 
 
-- name: Add root user to mysql
+#- name: Add root user to mysql
+#  mysql_user:
+#    config_file: /etc/mysql/my.cnf
+#    login_host: localhost
+#    login_user: root    
+#    login_password: ""
+#    login_port: 3306
+#    name: '{{ mysql_user }}'
+#    password: '{{ mysql_root_password }}'
+#    encrypted: yes
+#    priv: '{{ mysql_db_name }}.*ALL'
+#    state: present
+#    login_unix_socket: /var/run/mysqld/mysqld.sock
+
+- name: Create user for the database
   mysql_user:
-    name: {{ mysql_user }}
-    password: {{ mysql_root_password }}
-    encrypted: yes
-    priv: '{{ mysql_db_name }}.*ALL'
+    config_file: /etc/mysql/my.cnf
+    login_host: localhost
+    login_user: root
+    login_password: ""
+    login_port: 3306
+    name: '{{ mysql_user }}'
+    password: '{{ mysql_password }}'
+    priv: '{{ mysql_db_name  }}.*:ALL'
     state: present
-    login_unix_socket: /var/run/mysqld/mysqld.sock
 
 - name: Remove all anonymous user from mysql
   mysql_user:
     name: ''
     host_all: yes
     state: absent
-    login_user: {{ mysql_user }}
-    login_password: {{ mysql_root_password }}
+    login_user: root
+    login_password: ""
 
 - name: Removes mysql test database
   mysql_db:
     name: test
     state: absent
-    login_user: {{ mysql_user }}
-    login_password: {{ mysql_root_password }}
+    login_user: root
+    login_password: ""
+  notify: restart mysql

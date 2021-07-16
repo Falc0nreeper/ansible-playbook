@@ -2,7 +2,7 @@
 # tasks file for webserver
 - name: install nginx
   apt:
-    name: {{ nginx_version }}
+    name: '{{ nginx_version }}'
     state: latest
 
 - name: create www directory
@@ -10,12 +10,12 @@
     path: /var/www/{{domain}}
     state: directory
     mode: 0755
-    owner: {{ user_webserver }}
-    group: {{ user_webserver }}
+    owner: '{{ user_webserver }}'
+    group: '{{ user_webserver }}'
 
 - name: delete default file nginx directory
   file:
-    path: {{nginx_default_dir}}
+    path: '{{nginx_default_dir}}'
     state: absent
   notify: restart nginx
 

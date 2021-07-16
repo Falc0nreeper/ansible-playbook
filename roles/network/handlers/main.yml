@@ -1,2 +1,6 @@
 ---
 # handlers file for network
+- name: reload ufw
+  service:
+    name: ufw
+    state: reloaded  
