@@ -1,10 +1,10 @@
 ---
 - hosts: prod
-  remote_user: awxible
+  remote_user: #choose your remote ansible user
   become: yes
 
   roles:
-    - # choose language depencies for deploy as php, python, ruby, nodejs, asp.net 
+    - # choose language depencies for deploy as php, python, ruby, nodejs, asp.net
     - # choose firewall type as firewalld or iptables, ufw
     - # choose webserver type as nginx or apache
     - # choose database as postgresql or mysql
