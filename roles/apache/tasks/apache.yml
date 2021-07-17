@@ -1,0 +1,17 @@
+---
+- name: Ensure Apache2 is installed
+  apt:
+    name: apache2
+    state: present
+
+- name: Ensure Apache2 is running
+  service:
+    name: apache2
+    state: started
+    enabled: yes
+
+- name: Copy config file
+  copy:
+    src: apache.conf.j2
+    dest: '{{ apache_dir }}{{ domain }}.conf'
+  notify: restart apache2

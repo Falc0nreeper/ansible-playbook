@@ -1,0 +1,4 @@
+---
+# vars file for apache
+apache_dir: /etc/apache2/sites-enabled/
+apache_default_dir: /etc/apache2/sites-enabled/000-default.conf

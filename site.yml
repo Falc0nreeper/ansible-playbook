@@ -4,7 +4,7 @@
   become: yes
 
   roles:
-    - depencies
-    - network
-    - webserver
-    - database
+    - # choose language depencies for deploy as php, python, ruby, nodejs, asp.net 
+    - # choose firewall type as firewalld or iptables, ufw
+    - # choose webserver type as nginx or apache
+    - # choose database as postgresql or mysql
