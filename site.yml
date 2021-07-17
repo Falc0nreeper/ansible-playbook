@@ -1,5 +1,5 @@
 ---
-- hosts: prod
+- hosts: production # choose type of server
   remote_user: #choose your remote ansible user
   become: yes
 
