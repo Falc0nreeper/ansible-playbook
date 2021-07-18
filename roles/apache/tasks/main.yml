@@ -1,0 +1,16 @@
+---
+- include: Centos.yml
+  when: ansible_os_family = 'Centos'
+  tags: package
+
+- include: Ubuntu.yml
+  when: ansible_os_family = 'Ubuntu'
+  tags: package
+
+- include: Debian.yml
+  when: ansible_os_family = 'Debian'
+  tags: package
+
+- include: Redhat.yml
+  when: ansible_os_family = 'Redhat'
+  tags: package
